@@ -3,10 +3,10 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Spinner } from "@/components/common/Spinner";
 import type { ReactNode } from "react";
 import { useAuthStore } from "@/store/authStore";
+import { HomePage } from "@/pages/HomePage";
+import { LoginPage } from "@/pages/auth/LoginPage";
+import { RegisterPage } from "@/pages/auth/RegisterPage";
 
-const HomePage = () => <PlaceholderPage title="Home" />
-const LoginPage = () => <PlaceholderPage title="Login" />
-const RegisterPage = () => <PlaceholderPage title="Register" />
 const DashboardPage = () => <PlaceholderPage title="Dashboard" />
 const PlansPage = () => <PlaceholderPage title="Plans" />
 const WorkoutPage = () => <PlaceholderPage title="Workout" />
@@ -46,70 +46,50 @@ export function AppRouter() {
     return (
         <Routes>
             <Route path="/" element={
-                <AppLayout showSidebar={false}>
-                    <HomePage />
-                </AppLayout>
+                <AppLayout><HomePage /></AppLayout>
             } />
             <Route path="/login" element={
                 <GuestRoute>
-                    <AppLayout showSidebar={false}>
-                        <LoginPage />
-                    </AppLayout>
+                    <AppLayout><LoginPage /></AppLayout>
                 </GuestRoute>
             } />
             <Route path="/register" element={
                 <GuestRoute>
-                    <AppLayout showSidebar={false}>
-                        <RegisterPage />
-                    </AppLayout>
+                    <AppLayout><RegisterPage /></AppLayout>
                 </GuestRoute>
             } />
             <Route path="/dashboard" element={
                 <ProtectedRoute>
-                    <AppLayout>
-                        <DashboardPage />
-                    </AppLayout>
+                    <AppLayout><DashboardPage /></AppLayout>
                 </ProtectedRoute>
             } />
             <Route path="/plans" element={
                 <ProtectedRoute>
-                    <AppLayout>
-                        <PlansPage />
-                    </AppLayout>
+                    <AppLayout><PlansPage /></AppLayout>
                 </ProtectedRoute>
             } />
             <Route path="/workout" element={
                 <ProtectedRoute>
-                    <AppLayout>
-                        <WorkoutPage />
-                    </AppLayout>
+                    <AppLayout><WorkoutPage /></AppLayout>
                 </ProtectedRoute>
             } />
             <Route path="/progress" element={
                 <ProtectedRoute>
-                    <AppLayout>
-                        <ProgressPage />
-                    </AppLayout>
+                    <AppLayout><ProgressPage /></AppLayout>
                 </ProtectedRoute>
             } />
             <Route path="/subscription" element={
                 <ProtectedRoute>
-                    <AppLayout>
-                        <SubscriptionPage />
-                    </AppLayout>
+                    <AppLayout><SubscriptionPage /></AppLayout>
                 </ProtectedRoute>
             } />
             <Route path="/settings" element={
                 <ProtectedRoute>
-                    <AppLayout>
-                        <SettingsPage />
-                    </AppLayout>
+                    <AppLayout><SettingsPage /></AppLayout>
                 </ProtectedRoute>
             } />
             <Route path="*" element={
-                <AppLayout showSidebar={false}>
-                    <NotFoundPage />
-                </AppLayout>
+                <AppLayout><NotFoundPage /></AppLayout>
             } />
         </Routes>
     )

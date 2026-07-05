@@ -1,11 +1,10 @@
-import { useAuthStore } from "@/store/authStore";
 import type { ReactNode } from "react";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "lucide-react";
+import { useAuthStore } from "@/store/authStore";
 
 interface AppLayoutProps {
     children: ReactNode
-    showSidebar?: boolean
 }
 
 export function AppLayout({ children, showSidebar = true }: AppLayoutProps) {
@@ -16,7 +15,7 @@ export function AppLayout({ children, showSidebar = true }: AppLayoutProps) {
             <Navbar />
 
             <div className="flex flex-1">
-                {showSidebar && isAuthenticated && <Sidebar />}
+                {isAuthenticated && <Sidebar />}
 
                 <main className="flex-1 p-6 max-w-7xl mx-auto w-full">
                     {children}
