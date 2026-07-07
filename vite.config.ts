@@ -12,7 +12,34 @@ export default defineConfig({
         // PWA - generate service worker and web manifest
         VitePWA({
             registerType: 'autoUpdate',
-            includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
+            workbox: {
+                navigateFallback: '/index.html',
+
+                navigateFallbackDenylist: [/^\/api/],
+
+                globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
+
+                runtimeCaching: [
+                    {
+                        urlPattern: /^https?:\/\/.*\/api\/workout-plans/,
+                        handler: 'NetworkFirst',
+                        options: {
+                            cacheName: 'api-workout-plans',
+                            expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 },
+                            networkTimeoutSeconds: 5,
+                        },
+                    },
+                    {
+                        urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com/,
+                        handler: 'CacheFirst',
+                        options: {
+                            cacheName: 'google-fonts',
+                            expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 },
+                        },
+                    },
+                ],
+            },
+
             manifest: {
                 name: 'GymTracker',
                 short_name: 'GymTracker',
@@ -20,15 +47,39 @@ export default defineConfig({
                 theme_color: '#0a0a0a',
                 background_color: '#0a0a0a',
                 display: 'standalone',
+                orientation: 'portrait',
+                start_url: '/dashboard',
+                scope: '/',
+                lang: 'en',
+
                 icons: [
+                    { src: 'pwa-64x64.png', sizes: '64x64', type: 'image/png' },
                     { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
                     { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+                    // maskable ikona — Android adaptive icons
+                    { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
                 ],
+
+                shortcuts: [
+                    {
+                        name: 'New workout',
+                        url: '/workout',
+                        icons: [{ src: 'pwa-192x192.png', sizes: '192x192' }],
+                    },
+                    {
+                        name: 'My progress',
+                        url: '/progress',
+                        icons: [{ src: 'pwa-192x192.png', sizes: '192x192' }],
+                    },
+                ],
+
+                screenshots: [],
             },
-            workbox: {
-                navigateFallback: '/index.html',
-                globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-            },
+
+            devOptions: {
+                enabled: true,
+                type: 'module'
+            }
         }),
     ],
     resolve: {
