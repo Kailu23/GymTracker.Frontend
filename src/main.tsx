@@ -3,11 +3,17 @@ import { createRoot } from 'react-dom/client'
 import '@/index.css'
 import App from '@/App'
 
-const saved = localStorage.getItem('gym-theme') ?? 'system'
-document.documentElement.setAttribute('data-theme', saved)
+try {
+    const raw = localStorage.getItem('gym-theme')
+    const theme = raw ? JSON.parse(raw)?.state?.theme??'system':'system'
+    document.documentElement.setAttribute('data-theme', theme)
+
+} catch {
+    document.documentElement.setAttribute('data-theme', 'system')
+}
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+    <StrictMode>
+        <App />
+    </StrictMode>,
 )
