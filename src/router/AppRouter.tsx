@@ -11,6 +11,7 @@ import { WorkoutPlansPage } from "@/pages/WorkoutPlansPage";
 import { ActiveWorkoutPage } from "@/pages/ActiveWorkoutPage";
 import { ProgressPage } from "@/pages/ProgressPage";
 import { SubscriptionPage } from "@/pages/SubscriptionPage";
+import { OfflinePage } from "@/pages/OfflinePage";
 
 const SettingsPage = () => <PlaceholderPage title="Settings" />
 const NotFoundPage = () => <PlaceholderPage title="404 - Not Found" />
@@ -69,9 +70,9 @@ export function AppRouter() {
                 </ProtectedRoute>
             } />
             <Route path="/workout" element={
-                //<ProtectedRoute>
+                <ProtectedRoute>
                     <AppLayout><ActiveWorkoutPage /></AppLayout>
-                //</ProtectedRoute>
+                </ProtectedRoute>
             } />
             <Route path="/progress" element={
                 <ProtectedRoute>
@@ -87,6 +88,9 @@ export function AppRouter() {
                 <ProtectedRoute>
                     <AppLayout><SettingsPage /></AppLayout>
                 </ProtectedRoute>
+            } />
+            <Route path="/offline" element={
+                <OfflinePage />
             } />
             <Route path="*" element={
                 <AppLayout><NotFoundPage /></AppLayout>
