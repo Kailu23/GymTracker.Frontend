@@ -6,11 +6,11 @@ import { useAuthStore } from "@/store/authStore";
 import { HomePage } from "@/pages/HomePage";
 import { LoginPage } from "@/pages/auth/LoginPage";
 import { RegisterPage } from "@/pages/auth/RegisterPage";
+import { DashboardPage } from "@/pages/DashboardPage";
+import { WorkoutPlansPage } from "@/pages/WorkoutPlansPage";
+import { ActiveWorkoutPage } from "@/pages/ActiveWorkoutPage";
+import { ProgressPage } from "@/pages/ProgressPage";
 
-const DashboardPage = () => <PlaceholderPage title="Dashboard" />
-const PlansPage = () => <PlaceholderPage title="Plans" />
-const WorkoutPage = () => <PlaceholderPage title="Workout" />
-const ProgressPage = () => <PlaceholderPage title="Progress" />
 const SubscriptionPage = () => <PlaceholderPage title="Subscription" />
 const SettingsPage = () => <PlaceholderPage title="Settings" />
 const NotFoundPage = () => <PlaceholderPage title="404 - Not Found" />
@@ -65,13 +65,13 @@ export function AppRouter() {
             } />
             <Route path="/plans" element={
                 <ProtectedRoute>
-                    <AppLayout><PlansPage /></AppLayout>
+                    <AppLayout><WorkoutPlansPage /></AppLayout>
                 </ProtectedRoute>
             } />
             <Route path="/workout" element={
-                <ProtectedRoute>
-                    <AppLayout><WorkoutPage /></AppLayout>
-                </ProtectedRoute>
+                //<ProtectedRoute>
+                    <AppLayout><ActiveWorkoutPage /></AppLayout>
+                //</ProtectedRoute>
             } />
             <Route path="/progress" element={
                 <ProtectedRoute>
