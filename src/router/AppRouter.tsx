@@ -10,8 +10,8 @@ import { DashboardPage } from "@/pages/DashboardPage";
 import { WorkoutPlansPage } from "@/pages/WorkoutPlansPage";
 import { ActiveWorkoutPage } from "@/pages/ActiveWorkoutPage";
 import { ProgressPage } from "@/pages/ProgressPage";
+import { SubscriptionPage } from "@/pages/SubscriptionPage";
 
-const SubscriptionPage = () => <PlaceholderPage title="Subscription" />
 const SettingsPage = () => <PlaceholderPage title="Settings" />
 const NotFoundPage = () => <PlaceholderPage title="404 - Not Found" />
 
