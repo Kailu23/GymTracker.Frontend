@@ -30,7 +30,7 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
     const { isAuthenticated, isLoading } = useAuthStore()
 
     if (isLoading) return <Spinner fullscreen />
-    if (isAuthenticated) return <Navigate to="/login" replace />
+    if (!isAuthenticated) return <Navigate to="/login" replace />
 
     return <>{children}</>
 }
