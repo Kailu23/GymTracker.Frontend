@@ -127,7 +127,7 @@ ${goalFilter === g
                                     <span className="text-var(--color-text-muted)">{plan.durationWeeks} week{plan.durationWeeks > 1 ? 's' : ''}</span>
                                 </div>
 
-                                {locked ? (
+                                {!locked ? (
                                     <Link to="/subscription">
                                     <Button variant="secondary" size="small" className="w-full" icon={<Lock size={14}/>}>
                                     Unlock Premium

@@ -23,7 +23,10 @@ export function useWorkoutPlan(id: string) {
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
-        if (!id) return
+        if (!id) {
+            setIsLoading(false)
+            return
+        }
 
         workoutService.getPlanById(id)
             .then(setPlan)
