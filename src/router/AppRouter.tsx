@@ -11,9 +11,9 @@ import { WorkoutPlansPage } from "@/pages/WorkoutPlansPage";
 import { ActiveWorkoutPage } from "@/pages/ActiveWorkoutPage";
 import { ProgressPage } from "@/pages/ProgressPage";
 import { SubscriptionPage } from "@/pages/SubscriptionPage";
+import { SettingsPage } from "@/pages/SettingsPage";
 import { OfflinePage } from "@/pages/OfflinePage";
 
-const SettingsPage = () => <PlaceholderPage title="Settings" />
 const NotFoundPage = () => <PlaceholderPage title="404 - Not Found" />
 
 function PlaceholderPage({ title }: { title: string }) {

@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { type AuthResponse, type LoginRequest, type RegisterRequest } from "@/types/authTypes";
+import { type AuthResponse, type LoginRequest, type RegisterRequest, type UpdateProfileRequest, type ChangePasswordRequest } from "@/types/authTypes";
 
 export const authService = {
     login: (data: LoginRequest) =>
@@ -12,5 +12,11 @@ export const authService = {
         api.get<AuthResponse['user']>('/auth/me').then(r => r.data),
 
     logout: () =>
-        api.post('/auth/logout').catch(() => { })
+        api.post('/auth/logout').catch(() => { }),
+
+    updateProfile: (data: UpdateProfileRequest) =>
+        api.put<AuthResponse['user']>('/auth/profile', data).then(r => r.data),
+
+    changePassword: (data: ChangePasswordRequest) =>
+        api.post('/auth/change-password', data),
 }

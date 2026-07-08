@@ -1,9 +1,8 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import {  useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/authStore";
 import { authService } from "@/services/authService";
-import { clearTokens } from "@/services/api";
-import type { LoginRequest, RegisterRequest } from "@/types/authTypes";
+import type { LoginRequest, RegisterRequest, UpdateProfileRequest, ChangePasswordRequest } from "@/types/authTypes";
 
 // ViewModel
 
@@ -33,5 +32,15 @@ export function useAuth() {
         navigate('/login')
     }, [navigate, storeLogout])
 
-    return { user, isAuthenticated, isLoading, login, register, logout }
+    const updateProfile = useCallback(async (data: UpdateProfileRequest) => {
+        const updated = await authService.updateProfile(data)
+        setUser(updated)
+        return updated
+    }, [setUser])
+
+    const changePassword = useCallback(async (data: ChangePasswordRequest) => {
+        await authService.changePassword(data)
+    }, [])
+
+    return { user, isAuthenticated, isLoading, login, register, logout, updateProfile, changePassword }
 }
