@@ -15,9 +15,7 @@ function ChartToolTip({ active, payload, label }: {
             <p className="text-[var(--color-text-muted)] mb-1">{label}</p>
             {payload.map(p => (
                 <p key={p.name} className="font-semibold text-[var(--color-text)]">
-                    <p>
-                        {p.value} kg
-                    </p>
+                    {p.value} kg
                 </p>
             ))}
         </div>
