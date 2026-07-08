@@ -8,12 +8,15 @@ export function useSubscription() {
     const [error, setError] = useState<string | null>(null)
     const [actionLoading, setActionLoading] = useState(false)
 
-    useEffect(() => {
-        stripeService.getSubscription()
+const fetchSubscription = useCallback(() => {
+    return stripeService.getSubscription()
             .then(setSubscription)
             .catch(() => setError('Not possible to load data about subscription.'))
-            .finally(() => setIsLoading(false))
     }, [])
+
+    useEffect(() => {
+        fetchSubscription().finally(() => setIsLoading(false))
+    }, [fetchSubscription])
 
     const startCheckout = useCallback(async (priceId: string) => {
         setActionLoading(true)
@@ -62,5 +65,6 @@ export function useSubscription() {
         startCheckout,
         openPortal,
         cancelSubscription,
+        refetchSubscription: fetchSubscription,
     }
 }

@@ -124,21 +124,41 @@ export function SubscriptionPage() {
     const {
         subscription, isLoading, error,
         actionLoading, isPremium,
-        startCheckout, openPortal, cancelSubscription
+        startCheckout, openPortal, cancelSubscription,
+        refetchSubscription
     } = useSubscription()
 
     useEffect(() => {
         if (searchParams.has('success') || searchParams.has('canceled')) {
-            const timeout = setTimeout(() => setSearchParams({}), 4000)
+            const timeout = setTimeout(() => setSearchParams({}), 11_000)
             return () => clearTimeout(timeout)
         }
     }, [searchParams, setSearchParams])
+
+    const justSucceededParam = searchParams.get('success') === 'true'
+
+    useEffect(() => {
+        if (!justSucceededParam || isPremium) return
+
+        // Webhook can take a moment to arrive after the checkout redirect —
+        // poll a few times before giving up and showing a "still processing" state.
+        let attempts = 0
+        const interval = setInterval(() => {
+            attempts += 1
+            refetchSubscription()
+            if (attempts >= 5) clearInterval(interval)
+        }, 2000)
+
+        return () => clearInterval(interval)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [justSucceededParam, isPremium])
 
     if (isLoading) return <Spinner />
 
     if (error) return <p className="text-[var(--color-danger)]">{error}</p>
 
-    const justSucceeded = searchParams.get('success') === 'true'
+    const justSucceeded = justSucceededParam&&isPremium
+    const stillProcessing = justSucceededParam && !isPremium
     const justCanceled = searchParams.get('canceled') === 'true'
 
     const currentPriceId = isPremium ? subscription?.interval === 'month' ? PLANS[0].id : PLANS[1].id : null
@@ -154,6 +174,8 @@ export function SubscriptionPage() {
             {/* Stripe redirect */}
             {justSucceeded && (
                  <StatusBanner color="success" label="The subscription has been successfully activated! Welcome to Premium."/>)}
+            {stillProcessing && (
+                 <StatusBanner color="warning" label="Payment received — activating your subscription, this can take a few seconds..."/>)}
                  {justCanceled && (
                      <StatusBanner color="warning" label="The payment has been cancelled. You can try again when you're ready."/>
                  )}
