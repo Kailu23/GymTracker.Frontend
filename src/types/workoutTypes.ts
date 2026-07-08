@@ -14,7 +14,7 @@ export interface Exercise {
 export interface WorkoutPlan {
     id: string
     name: string
-    descriptions: string
+    description: string
     difficulty: DifficultyLevel
     goal: WorkoutGoal
     durationWeeks: number

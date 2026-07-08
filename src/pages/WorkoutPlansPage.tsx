@@ -114,7 +114,7 @@ ${goalFilter === g
 
                                 <div className="flex flex-col gap-1">
                                     <h3 className="font-semibold text-[var(--color-text)]">{plan.name}</h3>
-                                    <p className="text-sm text-[var(--color-text-muted)] line-clamp-2">{plan.descriptions}</p>
+                                    <p className="text-sm text-[var(--color-text-muted)] line-clamp-2">{plan.description}</p>
                                 </div>
 
                                 <div className="flex flex-wrap gap-2 text-xs">
@@ -127,7 +127,7 @@ ${goalFilter === g
                                     <span className="text-var(--color-text-muted)">{plan.durationWeeks} week{plan.durationWeeks > 1 ? 's' : ''}</span>
                                 </div>
 
-                                {!locked ? (
+                                {locked ? (
                                     <Link to="/subscription">
                                     <Button variant="secondary" size="small" className="w-full" icon={<Lock size={14}/>}>
                                     Unlock Premium
