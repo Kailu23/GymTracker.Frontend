@@ -1,8 +1,7 @@
-import { Bar, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useProgress } from "@/hooks/useProgress";
 import { Spinner } from "@/components/common/Spinner";
 import { type ExerciseProgress } from "@/types/workoutTypes";
-import { BarChart } from "lucide-react";
 
 function ChartToolTip({ active, payload, label }: {
     active?: boolean,
