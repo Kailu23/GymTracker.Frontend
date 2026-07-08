@@ -1,9 +1,9 @@
-import { forwardRef, type InputHTMLAttributes } from "react";
+import { forwardRef, type InputHTMLAttributes, type ReactNode } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string
     error?: string
-    leftIcon?: string
+    leftIcon?: ReactNode
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -30,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 placeholder:text-[var(--color-text-muted)]
                 ${error
                 ? 'border-[var(--color-danger)] focus:border-[var(--color-danger)]'
-                : 'border-[var(--color-danger)] focus:border-[var(--color-accent)]'
+                : 'border-[var(--color-border)] focus:border-[var(--color-accent)]'
                 }
                 ${leftIcon ? 'pl-9':''}
                 ${className}
