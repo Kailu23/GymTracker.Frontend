@@ -70,10 +70,12 @@ export function ProgressPage() {
     if (error) return <p className="text-[var(--color-danger)]">{error}</p>
     if (!stats) return null
 
-    const volumeData = stats.weeklyVolume.map(v => ({
+    const volumeData = (stats.weeklyVolume ?? []).map(v => ({
         date: new Date(v.date).toLocaleDateString('hr-HR', { day: '2-digit', month: '2-digit' }),
         volume: v.totalVolumeKg,
     }))
+
+    const exerciseProgress = stats.exerciseProgress ?? []
 
     return (
         <div className="flex flex-col gap-8">
@@ -97,18 +99,18 @@ export function ProgressPage() {
             </div>
 
             {/* Progress per workout */}
-            {stats.exerciseProgress.length > 0 && (
+            {exerciseProgress.length > 0 && (
                 <div>
                     <h2 className="font-semibold text-[var(--color-text)] mb-4">Progress per workout</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        {stats.exerciseProgress.map(ep => (
+                        {exerciseProgress.map(ep => (
                             <ExerciseProgressCard key={ep.exerciseId} data={ep} />
                         ))}
                     </div>
                 </div>
             )}
 
-            {stats.exerciseProgress.length === 0 && (
+            {exerciseProgress.length === 0 && (
                 <p className="text-center text-[var(--color-text-muted)] py-12">
                     There is not enough data to show progress. Log some workouts!
                 </p>
