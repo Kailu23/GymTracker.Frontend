@@ -27,7 +27,7 @@ export function Navbar() {
                     {isAuthenticated ? (
                         <>
                         {/* Avatar and name */}
-                            <Link to="/profile"
+                            <Link to="/settings"
                                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm
                         text-[var(--color-text-muted)] hover:text-[var(--color-text)]
                         hover:bg-[var(--color-bg-input)] transition-colors "
