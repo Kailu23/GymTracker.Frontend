@@ -15,7 +15,7 @@ export const THEMES: { id: Theme; label: string }[] =
 
 interface ThemeStore {
     theme: Theme
-    setTHeme: (theme: Theme) => void
+    setTheme: (theme: Theme) => void
 }
 
 export const useThemeStore = create<ThemeStore>()(

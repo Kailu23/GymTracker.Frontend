@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { stripeService } from "@/services/stripeService";
-import { useAuthStore } from "@/store/authStore";
 import type { UserSubscription, CreateCheckoutSessionRequest } from "@/types/subscriptionTypes";
 
 export function useSubscription() {
@@ -8,9 +7,6 @@ export function useSubscription() {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [actionLoading, setActionLoading] = useState(false)
-
-    const setUser = useAuthStore(s => s.setUser)
-    const user = useAuthStore(s => s.user)
 
     useEffect(() => {
         stripeService.getSubscription()
@@ -50,16 +46,12 @@ export function useSubscription() {
         try {
             const updated = await stripeService.cancelSubscription()
             setSubscription(updated)
-
-            if (user) {
-                setUser({ ...user, subscriptionStatus: updated.status === 'active' ? 'premium' : 'free' })
-            }
         } finally {
             setActionLoading(false)
         }
-    }, [user, setUser])
+    }, [])
 
-    const isPremium = subscription?.status === 'active' || subscription?.status === 'trialling'
+    const isPremium = subscription?.status === 'active' || subscription?.status === 'trialing'
 
     return {
         subscription,

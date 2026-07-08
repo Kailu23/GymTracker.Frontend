@@ -9,7 +9,6 @@ export interface User {
     lastName: string
     role: UserRole
     avatarUrl?: string
-    subscriptionStatus: 'free' | 'premium' | 'cancelled'
 }
 
 export interface LoginRequest {

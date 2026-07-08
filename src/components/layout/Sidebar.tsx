@@ -4,6 +4,7 @@ import {
     ClipboardList, CreditCard, Settings,
 } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
+import { useSubscription } from "@/hooks/useSubscription";
 
 const navItems = [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -16,6 +17,7 @@ const navItems = [
 
 export function Sidebar() {
     const user = useAuthStore(s => s.user)
+    const { isPremium } = useSubscription()
 
     return (
         <aside className="
@@ -47,12 +49,12 @@ export function Sidebar() {
             <div className="p-3 border-t border-[var(--color-border)]">
             <div className={`
                 text-xs text-center py-1.5 px-3 rounded-full font-medium
-                ${user.subscriptionStatus === 'premium'
+                ${isPremium
                 ? 'bg-[var(--color-accent)] text-[var(--color-accent-text)]'
                 : 'bg-[var(--color-bg-input)] text-[var(--color-text-muted)]'
                 }
                 `}>
-                {user.subscriptionStatus==='premium' ? 'Premium':'Free plan'}
+                {isPremium ? 'Premium':'Free plan'}
                 </div>
             </div>
         )}

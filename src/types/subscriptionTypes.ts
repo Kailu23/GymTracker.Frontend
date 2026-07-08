@@ -11,9 +11,9 @@ export interface SubscriptionPlan {
 
 export type SubscriptionStatus =
     | 'active'
-    | 'cancelled'
-    | 'past_due'
-    | 'trialling'
+    | 'canceled'
+    | 'pastdue'
+    | 'trialing'
     | 'free'
 
 export interface UserSubscription {

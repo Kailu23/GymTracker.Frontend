@@ -7,7 +7,7 @@ interface AppLayoutProps {
     children: ReactNode
 }
 
-export function AppLayout({ children, showSidebar = true }: AppLayoutProps) {
+export function AppLayout({ children }: AppLayoutProps) {
     const isAuthenticated = useAuthStore(s => s.isAuthenticated)
 
     return (

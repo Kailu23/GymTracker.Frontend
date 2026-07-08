@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Lock, ChevronRight } from "lucide-react";
 import { useWorkoutPlans } from "@/hooks/useWorkouts";
-import { useAuthStore } from "@/store/authStore";
+import { useSubscription } from "@/hooks/useSubscription";
 import { Spinner } from "@/components/common/Spinner";
 import { Button } from "@/components/common/Button";
 import type { DifficultyLevel, WorkoutGoal } from "@/types/workoutTypes";
@@ -31,8 +31,7 @@ type FilterDifficulty = DifficultyLevel | 'All'
 
 export function WorkoutPlansPage() {
     const { plans, isLoading, error } = useWorkoutPlans()
-    const user = useAuthStore(s => s.user)
-    const isPremium = user?.subscriptionStatus === 'premium'
+    const { isPremium } = useSubscription()
 
     const [goalFilter, setGoalFilter] = useState<FilterGoal>('All')
     const [difficultyFilter, setDifficultyFilter] = useState<FilterDifficulty>('All')
@@ -74,7 +73,7 @@ ${goalFilter === g
 
                 {/* Difficulty filter */}
                 <div className="flex gap-1 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg p-1">
-                    {(['All', 'Beginner', 'Intermediate', 'Advanced'] as FilterDiff[]).map(d => (
+                    {(['All', 'Beginner', 'Intermediate', 'Advanced'] as FilterDifficulty[]).map(d => (
                         <button key={d}
                             onClick={() => setDifficultyFilter(d)}
                             className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors

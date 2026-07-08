@@ -187,7 +187,7 @@ export function SubscriptionPage() {
                 </div>
             )}
 
-            {subscription?.status === 'past_due' && (
+            {subscription?.status === 'pastdue' && (
                 <StatusBanner color="danger" label="Payment failed. Update payment information in the portal." />
             )}
 

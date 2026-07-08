@@ -108,7 +108,9 @@ export function ActiveWorkoutPage() {
             setSaving(false)
         }
     }
-    if (isLoading) return <Spinner />
+    if (isLoading) {
+        return <Spinner />
+    }
 
     const exercises = plan?.exercises ?? []
     const totalSets = Object.values(sets).flat().length
@@ -147,31 +149,31 @@ export function ActiveWorkoutPage() {
             ) : (
                 exercises.map(exercise => (
                     <ExerciseCard
-                    key={exercise.id}
-                    exercise={exercise}
-                    sets={sets[exercise.id]??[]}
-                    onAddSet={addSet}
+                        key={exercise.id}
+                        exercise={exercise}
+                        sets={sets[exercise.id] ?? []}
+                        onAddSet={addSet}
                     />
                 ))
             )}
 
             {/* Notes */}
             <Input
-            label="Notes (optional)"
-            placeholder="How are you feeling today?"
-            value={notes}
-            onChange={e=>setNotes(e.target.value)}
+                label="Notes (optional)"
+                placeholder="How are you feeling today?"
+                value={notes}
+                onChange={e => setNotes(e.target.value)}
             />
 
             {/* End workout */}
             <Button
-            size="large"
-            loading={saving}
-            disabled={totalSets===0}
-            onClick={handleFinish}
-            className="w-full"
+                size="large"
+                loading={saving}
+                disabled={totalSets === 0}
+                onClick={handleFinish}
+                className="w-full"
             >
-            End workout: {totalSets} sets {totalSets !== 1 ? 's' : ''}
+                End workout: {totalSets} sets {totalSets !== 1 ? 's' : ''}
             </Button>
         </div>
     )
@@ -217,7 +219,7 @@ function ExerciseCard({ exercise, sets, onAddSet }: ExerciseCardProps) {
                 className="mt-3 flex items-center gap-1.5 text-sm text-[var(--color-text-muted)]
             hover:text-[var(--color-accent)] transition-colors"
             >
-            <Plus size={14}/> Add set
+                <Plus size={14} /> Add set
             </button>
         </div>
     )
